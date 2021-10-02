@@ -1,0 +1,23 @@
+root: intro
+entries:
+- file: intro
+- file: README
+entries:
+  - file: metrics/00_F1
+  - file: metrics/01_ROC
+  - file: metrics/02_CK
+  - file: metrics/03_LL
+  - file: metrics/04_JS
+  - file: metrics/05_R2
+  - file: metrics/06_KL
+  - file: metrics/07_FM
+  - file: metrics/08_BA
+  - file: metrics/09_RS
+  - file: metrics/10_HS
+  - file: metrics/11_CS
+  - file: metrics/12_VS
+  - file: metrics/14_CD
+  - file: metrics/15_MS
+  - file: metrics/16_MC
+  - file: metrics/17_PR
+  - file: metrics/21_MAE

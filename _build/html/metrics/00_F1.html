@@ -1,0 +1,495 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>F₁ Score &#8212; Evaluation Metrics</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="ROC &amp; AUC Curve" href="01_ROC.html" />
+    <link rel="prev" title="Evaluation Metrics" href="../intro.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Evaluation Metrics</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Evaluation Metrics
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   F₁ Score
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_ROC.html">
+   ROC &amp; AUC Curve
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_CK.html">
+   Cohen’s kappa
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_LL.html">
+   Log Loss
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_JS.html">
+   Jaccard Similarity
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_R2.html">
+   R-Squared
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06_KL.html">
+   Kullback-Leibler Divergence
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07_FM.html">
+   Fowlkes-Mallows Score
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_BA.html">
+   Balanced Accuracy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09_RS.html">
+   Rand Score
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10_HS.html">
+   Homogeneity Score
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11_CS.html">
+   Completeness Score
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12_VS.html">
+   V score
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/metrics/00_F1.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://gitlab.aicrowd.com/aicrowd/evaluation-metrics-book/"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://gitlab.aicrowd.com/aicrowd/evaluation-metrics-book//issues/new?title=Issue%20on%20page%20%2Fmetrics/00_F1.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction-the-problem">
+   Introduction : The problem
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-is-accuracy">
+   What is accuracy?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#why-is-accuracy-a-bad-metric-to-use-in-this-case">
+   Why is accuracy a bad metric to use in this case?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-do-we-solve-this-problem">
+   How do we solve this problem?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#possible-scenarios-given-in-a-confusion-matrix">
+   Possible scenarios given in a confusion matrix
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#recall">
+   Recall
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#precision">
+   Precision
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-f1-score">
+   The F₁ score
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusion">
+   Conclusion
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="f1-score">
+<h1>F₁ Score<a class="headerlink" href="#f1-score" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction-the-problem">
+<h2>Introduction : The problem<a class="headerlink" href="#introduction-the-problem" title="Permalink to this headline">¶</a></h2>
+<p>A store owner recently noticed an alarmingly high rate of shoplifting. He develops a machine learning model that predicts if a customer has shoplifted or not and it is 95% accurate.</p>
+<p><img alt="title" src="../_images/title.jpg" /></p>
+<p>He deploys the model but a month later catches no shoplifters…</p>
+<p>Why?</p>
+</div>
+<div class="section" id="what-is-accuracy">
+<h2>What is accuracy?<a class="headerlink" href="#what-is-accuracy" title="Permalink to this headline">¶</a></h2>
+<p>Before we get into this problem it is important to understand what accuracy is.</p>
+<blockquote>
+<div><p>Accuracy is the number of times you predicted something correctly divided by how many times you actually predicted it.</p>
+</div></blockquote>
+<div class="math notranslate nohighlight">
+\[\%\ Accuracy\ =\ \frac{Number\ of\ predictions\ that\ were\ correct}{Total\ number\ of\ predictions} \ *\ 100$\]</div>
+</div>
+<div class="section" id="why-is-accuracy-a-bad-metric-to-use-in-this-case">
+<h2>Why is accuracy a bad metric to use in this case?<a class="headerlink" href="#why-is-accuracy-a-bad-metric-to-use-in-this-case" title="Permalink to this headline">¶</a></h2>
+<p>If you closely look at the dataset, you will notice that out of the 10,000 customers that entered the store, only 500 were shoplifters in that month.</p>
+<p>Some quick math will tell you that 95% of customers are not shoplifters and the other 5% are.
+<img alt="1.png" src="../_images/1.png" /></p>
+<p>If you basically said that everyone was not a shoplifter, you’d be correct in 95 out of 100 cases, which is what the model did.</p>
+<p>You would be wrong in the other 5 cases, but who cares?</p>
+<p>We’re still 95% accurate, but this is clearly not what we are looking for. Accuracy as a metric isn’t wrong, its just that we are deceived by it.</p>
+<blockquote>
+<div><p>This problem happens in ‘imbalanced’ datasets where the data is heavily skewed.</p>
+</div></blockquote>
+<p>You’re either a shoplifter, or you’re not, and the former is significantly more present in the dataset.</p>
+<p>Our model finds a shortcut to increase accuracy.
+<img alt="3.png" src="../_images/3.png" /></p>
+<blockquote>
+<div><p>Moral of the story: Accuracy is not a suitable metric to use in situations where the data is skewed.</p>
+</div></blockquote>
+</div>
+<div class="section" id="how-do-we-solve-this-problem">
+<h2>How do we solve this problem?<a class="headerlink" href="#how-do-we-solve-this-problem" title="Permalink to this headline">¶</a></h2>
+<p>An easy way to fix this problem is by evaluating your model using a different metric.
+Let us take a look at recall and precision, but first, it is important to understand some terminology.</p>
+<p>This is a confusion matrix, it shows you all the possible scenarios of the predictions of a model Vs the ground truth.</p>
+<p><img alt="image.png" src="https://cdn.hashnode.com/res/hashnode/image/upload/v1621166108004/JY7AhuDMu.png" /></p>
+<p>Pretty confusing right?
+(No pun intended)</p>
+<p>Let’s simplify it.</p>
+<p><img alt="image.png" src="https://cdn.hashnode.com/res/hashnode/image/upload/v1621161421951/GnhZThbH0.png" /></p>
+<p>This meme explains is better, the confusion matrix shows us the predictions of a model Vs the ground truth.</p>
+<p>Consider the doctor to be the model and the patient to be the ground truth.</p>
+<blockquote>
+<div><p>True/False = Whether model was right or not, Positive/Negative = Predictions of the model</p>
+</div></blockquote>
+</div>
+<div class="section" id="possible-scenarios-given-in-a-confusion-matrix">
+<h2>Possible scenarios given in a confusion matrix<a class="headerlink" href="#possible-scenarios-given-in-a-confusion-matrix" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Case 1: Our model predicts someone shoplifted when they actually did (TP - True Positive)</p></li>
+<li><p>Case 2: Our model predicts someone shoplifted when they didn’t (FP - False Positive)</p></li>
+<li><p>Case 3: Our model predicts someone did not shoplift when they did (FN - False Negative)</p></li>
+<li><p>Case 4: Our model predicts someone did not shoplift when they didn’t (TN - True Negative)</p></li>
+</ul>
+<p>Whenever you’re confused, just refer to the above meme ;)</p>
+</div>
+<div class="section" id="recall">
+<h2>Recall<a class="headerlink" href="#recall" title="Permalink to this headline">¶</a></h2>
+<p>In formal terms, ‘recall’ is defined using this formula.</p>
+<div class="math notranslate nohighlight">
+\[ Recall\ =\ \frac{True\ Positive}{True\ Positive+False\ Negative}\]</div>
+<ul class="simple">
+<li><p>What this metric basically does is tells us how good our model is at identifying relevant samples.</p></li>
+</ul>
+<p>Or</p>
+<ul class="simple">
+<li><p>How good is our model at catching actual shoplifters?</p></li>
+</ul>
+<blockquote>
+<div><p>TP: Shoplifters correctly identified
+FN: Shoplifters missed</p>
+</div></blockquote>
+<p>Now if the model classifies no one as a shoplifter, it is going to have 0 recall.</p>
+<p>This means it is “not good at all” if we are optimizing to have as high of recall as possible.</p>
+<p>On the flip side, what if we label everyone as a shoplifter?</p>
+<p>We’ll have a recall of 100%, after all, recall just cares about not missing shoplifters, not about false accusations on customers (False Positive).</p>
+<p>Is there a metric that does care about false accusations on customers? Yes.</p>
+</div>
+<div class="section" id="precision">
+<h2>Precision<a class="headerlink" href="#precision" title="Permalink to this headline">¶</a></h2>
+<p>We basically replace False Negatives with False Positives in the denominator from the previous formula.</p>
+<div class="math notranslate nohighlight">
+\[Precision\ =\ \frac{True\ Positive}{True\ Positive\ +\ False\ Positive}\]</div>
+<ul class="simple">
+<li><p>Out of all the positive classes we have predicted correctly, how many are actually positive.</p></li>
+</ul>
+<p>Or</p>
+<ul class="simple">
+<li><p>How good is our model at not making false accusations?</p></li>
+</ul>
+<p>By this point, you might’ve guessed what problem we will encounter if we only optimize for high precision in our model.</p>
+<p>The model can just call everyone not a shoplifter and have high precision.</p>
+<p>Recall and precision are related such that high precision leads to low recall, and low precision leads to high recall.</p>
+<p>We obviously want both to as high as possible, is there any metric that combines both precision and recall?</p>
+<p>Meet the F₁ score👋</p>
+</div>
+<div class="section" id="the-f1-score">
+<h2>The F₁ score<a class="headerlink" href="#the-f1-score" title="Permalink to this headline">¶</a></h2>
+<p>The F₁ score is the harmonic mean of precision and recall.</p>
+<p>The harmonic mean is a special type of mean(average) which is explained by this formula.</p>
+<p>We use this mean instead of the normal mean because the normal punishes extreme values.</p>
+<div class="math notranslate nohighlight">
+\[
+Harmonic\ mean\ of\ a,b\ =\ \frac{2ab}{a+b}\]</div>
+<div class="math notranslate nohighlight">
+\[F_{1} \ Score\ =Harmonic\ mean\ of\ precision\ and\ recall\ =\ \frac{2\ \ *\ precision\ *\ recall}{precision+recall}\]</div>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
+<p>Now if we optimize our model to have an F₁ score, we can have high precision and recall.</p>
+<p>This translates to our model being able to catch shoplifters and at the same time not falsely accuse innocent customers, hence solving our problem.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./metrics"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="../intro.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Evaluation Metrics</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="01_ROC.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">ROC &amp; AUC Curve</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Prasoon Pratham, Siddhartha, Dipam Chakraborty, Sharada Mohanty, and AIcrowd Community<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

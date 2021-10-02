@@ -1,0 +1,395 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Log Loss &#8212; Evaluation Metrics</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Jaccard Similarity" href="04_JS.html" />
+    <link rel="prev" title="Cohen’s kappa" href="02_CK.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Evaluation Metrics</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Evaluation Metrics
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="00_F1.html">
+   F₁ Score
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_ROC.html">
+   ROC &amp; AUC Curve
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_CK.html">
+   Cohen’s kappa
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Log Loss
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_JS.html">
+   Jaccard Similarity
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_R2.html">
+   R-Squared
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06_KL.html">
+   Kullback-Leibler Divergence
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07_FM.html">
+   Fowlkes-Mallows Score
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_BA.html">
+   Balanced Accuracy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09_RS.html">
+   Rand Score
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10_HS.html">
+   Homogeneity Score
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11_CS.html">
+   Completeness Score
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12_VS.html">
+   V score
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14_CD.html">
+   Concordant Discordant Ratio
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="15_MS.html">
+   Mean Squared Error
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="16_MC.html">
+   Matthew’s Correlation Coefficient
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/metrics/03_LL.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://gitlab.aicrowd.com/aicrowd/evaluation-metrics-book/"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://gitlab.aicrowd.com/aicrowd/evaluation-metrics-book//issues/new?title=Issue%20on%20page%20%2Fmetrics/03_LL.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#likelihood">
+   Likelihood
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Log Loss
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="log-loss">
+<h1>Log Loss<a class="headerlink" href="#log-loss" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p><img alt="1.png" src="../_images/title1.png" /></p>
+<p>Log loss is a metric where a lower value equates to better performing model, it is a slight variation on something called the “Likelihood” Function, let’s start there.</p>
+</div>
+<div class="section" id="likelihood">
+<h2>Likelihood<a class="headerlink" href="#likelihood" title="Permalink to this headline">¶</a></h2>
+<p>A car dealer, and is trying to sell 3 cars, he trains a machine learning model to predict whether they’ll be sold or not based on current market conditions. Here what happened 👇</p>
+<p><img alt="1.png" src="../_images/112.png" /></p>
+<p>The model gives a probabilty that the car would be sold or not. Then we have ground truth, which is what actually happened, either it got sold or it didn’t denoted by 0% or 100%.</p>
+<p>Likelihood is how “correct” the model or how close it was to the ground truth.</p>
+<p>Let us understand this in each case, starting with the Tesla.
+The model was 80% sure that and the rest 20% that it wouldn’t and groundtruth was that it actually ended up selling.</p>
+<blockquote>
+<div><p>Which the model was 80% (0.8) correct.</p>
+</div></blockquote>
+<p>Similarly in the case of the BMW it was 40% sure it would be sold and 60% that it wouldn’t and groundtruth was that it actually ended up selling.</p>
+<blockquote>
+<div><p>Which means in this case the model was 40% (0.4) correct.</p>
+</div></blockquote>
+<p>Lastly in the case of the Mercedes, the model thought it would sell with a 10% probability and 90% that it wouldn’t and groundtruth was that it actually ended up NOT selling.</p>
+<blockquote>
+<div><p>Which means in this case the model was 90% (0.9) correct.</p>
+</div></blockquote>
+<p>In order to find the likelihood, we multiply these values 0.9 x 0.4 x 0.8 = 0.288 and that is the likelihood.</p>
+<p>What we’re trying to find out here is how well the model lines up with the groundtruth, but there’s a problem with this metric.</p>
+<p>In this case we just had 3 scenarios but in most real life situations, there are hundreds or even thousands of these and the thing with that is the value of likelihood decreases as more and more cases are added as it can also be observed in the above example.</p>
+<p>This makes it incredibly difficult for the computer to caclulate the likelihood, we can solve this issue by using a modified likelihood metric : Log loss.</p>
+</div>
+<div class="section" id="id1">
+<h2>Log Loss<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>Log loss is essentially the log of the likelihood multiplied by -1, this is a simple computational trick that keeps the value in a range that the computer can calculate. As a result of these transformations, the lesser the value of the log loss, the better the model.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./metrics"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="02_CK.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Cohen’s kappa</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="04_JS.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Jaccard Similarity</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Prasoon Pratham, Siddhartha, Dipam Chakraborty, Sharada Mohanty, and AIcrowd Community<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
