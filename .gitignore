@@ -29,3 +29,6 @@ logs/
 
 # MacOS generated file
 .DS_STORE
+
+# Jupyter book
+_build/

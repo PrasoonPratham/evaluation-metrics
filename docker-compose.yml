@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./deploy/Dockerfile
+    volumes:
+      - .:/app:rw
+    tty: true
+    restart: on-failure
+    networks:
+      - common-shared-network
+
+networks:
+  common-shared-network:
