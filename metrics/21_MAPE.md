@@ -1,2 +1,0 @@
-### Mean Absolute Percentage Error
-
